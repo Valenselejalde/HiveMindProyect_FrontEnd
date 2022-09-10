@@ -1,0 +1,13 @@
+<div>
+    <form [formGroup]="form_usuario">
+        <div class="p-float-label">
+            <input id = "user" type="text" formControlName="username" pInputText>
+            <label for="user">Nombre de usuario</label>
+        </div>
+        <div class="p-float-label">
+            <input id="pwd" type="text" formControlName="password" pInputText>
+            <label for="pwd">Contraseña</label>
+        </div>
+    </form>
+    <p-button (click)="login()" label = "Login"></p-button>
+</div>

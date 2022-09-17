@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../providers/api.service';
+import { CineticService } from '../providers/cinetic.service';
 
 @Component({
   selector: 'app-sala',
@@ -8,18 +8,9 @@ import { ApiService } from '../providers/api.service';
 })
 export class SalaComponent implements OnInit {
 
-  salas:any;
-
-  constructor(private api:ApiService) { }
+  constructor(private cinetic: CineticService) { }
 
   ngOnInit(): void {
-    this.api.get('sala').subscribe(data => {
-      if (data != undefined) {
-        this.salas = data
-      }
-      
-      console.log(data)
-    })
+    this.cinetic.listar()
   }
-
 }

@@ -35,6 +35,18 @@ export class ApiService {
     return this.http.get(url, this.options_token).pipe(catchError(this.handleError<any>()))
   }
 
+  add (endoint:string, data:any) {
+    let url = `${this.base_url + '/' + endoint + '/'}`;
+    let dJson = JSON.stringify(data)
+    return this.http.post(url, dJson, this.options_token).pipe(catchError(this.handleError<any>()))
+  }
+
+  update (endoint:string, id:any, data:any) {
+    let url = `${this.base_url + '/' + endoint + '/' + id + '/'}`;
+    let dJson = JSON.stringify(data)
+    return this.http.patch(url, dJson, this.options_token).pipe(catchError(this.handleError<any>()))
+  }
+
   private handleError<T> (result?: T) {
     return (error: any): Observable<T> => {
       console.log(error.error)

@@ -13,6 +13,9 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
 import { SalaComponent } from './sala/sala.component';
+import {DialogModule} from 'primeng/dialog';
+import {DropdownModule} from 'primeng/dropdown';
+import { CineticService } from './providers/cinetic.service';
 
 @NgModule({
   declarations: [
@@ -30,9 +33,11 @@ import { SalaComponent } from './sala/sala.component';
     BrowserAnimationsModule,
     InputTextModule,
     ButtonModule,
-    TableModule 
+    TableModule,
+    DialogModule,
+    DropdownModule
   ],
-  providers: [ApiService],
+  providers: [ApiService, CineticService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

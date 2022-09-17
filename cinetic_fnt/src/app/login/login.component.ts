@@ -13,22 +13,22 @@ export class LoginComponent implements OnInit {
   form_usuario = this.frmB.group({
     username: ['', Validators.required],
     password: ['', Validators.required]
-  }) 
+  });
 
-  constructor(private api:ApiService, private frmB:FormBuilder, private router:Router) { }
+  constructor(private api: ApiService, private frmB: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   login() {
     this.api.login(this.form_usuario.value).subscribe(data => {
-        if (data != undefined) {
-          this.api.crear_header_token(data.token)
-          this.router.navigate(['/sala'])
-        }
-        else {
-          this.router.navigate(['/login'])
-        }
+      if (data != undefined) {
+        this.api.crear_header_token(data.token)
+        this.router.navigate(['/sala'])
+      }
+      else {
+        this.router.navigate(['/login'])
+      }
     })
   }
 }

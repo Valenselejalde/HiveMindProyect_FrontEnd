@@ -47,6 +47,11 @@ export class ApiService {
     return this.http.patch(url, dJson, this.options_token).pipe(catchError(this.handleError<any>()))
   }
 
+  delete (endoint:string, id:any) {
+    let url = `${this.base_url + '/' + endoint + '/' + id + '/'}`;
+    return this.http.delete(url, this.options_token).pipe(catchError(this.handleError<any>()))
+  }
+
   private handleError<T> (result?: T) {
     return (error: any): Observable<T> => {
       console.log(error.error)

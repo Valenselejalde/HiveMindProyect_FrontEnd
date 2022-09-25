@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.api.login(this.form_usuario.value).subscribe(data => {
       if (data != undefined) {
+        this.api.usuario = data
         this.api.crear_header_token(data.token)
         this.router.navigate(['/sala'])
       }

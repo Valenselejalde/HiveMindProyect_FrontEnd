@@ -1,0 +1,63 @@
+<div>
+    <p-table [value]="cinetic.lista">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <p-button label="Crear silla" (click)="cinetic.ver_formulario=true"></p-button>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Sala</th>
+                <th>Fila</th>
+                <th>Columna</th>
+                <th>Tipo</th>
+                <th>Precio</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-silla>
+            <tr>
+                <td>{{silla.sala.nombre}} - {{silla.sala.ciudad}}</td>
+                <td>{{silla.fila}}</td>
+                <td>{{silla.columna}}</td>
+                <td>{{silla.tipo}}</td>
+                <td>{{silla.precio}}</td>
+                <td>
+                    <p-button label="Editar"
+                        (click)="cinetic.llenar_formulario(silla); cinetic.ver_formulario=true;"></p-button>
+                </td>
+                <td>
+                    <p-button label="Borrar"
+                        (click)="cinetic.llenar_formulario(silla); cinetic.ver_formulario_borrar=true;"></p-button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<p-dialog header="Formulario silla" [(visible)]="cinetic.ver_formulario">
+    <form [formGroup]="cinetic.formulario">
+        <div class="grid p-fluid">
+            <div class="col-12 md:col-4">
+                <p-dropdown [options]="cinetic.lista_sala" optionLabel="nombre_ciudad" optionValue="id" formControlName="sala_id" placeholder="Sala"></p-dropdown>
+            </div>
+            <div class="col-12 md:col-4">
+                <input type="text" formControlName="fila" pInputText placeholder="Fila">
+            </div>
+            <div class="col-12 md:col-4">
+                <input type="text" formControlName="columna" pInputText placeholder="Columna">
+            </div>
+            <div class="col-12 md:col-4">
+                <input type="text" formControlName="tipo" pInputText placeholder="Tipo">
+            </div>
+            <div class="col-12 md:col-4">
+                <input type="text" formControlName="precio" pInputText placeholder="Precio">
+            </div>
+        </div>
+    </form>
+    <p-button label="Guardar" (click)="cinetic.crear_actualizar()"></p-button>
+</p-dialog>
+<p-dialog header="Confirmar silla" [(visible)]="cinetic.ver_formulario_borrar">
+    <span>¿Está seguro?</span><br /><br />
+    <p-button label="Confirmar" (click)="cinetic.eliminar()"></p-button>
+</p-dialog>

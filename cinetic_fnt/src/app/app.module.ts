@@ -8,21 +8,28 @@ import { LoginComponent } from './login/login.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './providers/api.service';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {InputTextModule} from 'primeng/inputtext';
-import {ButtonModule} from 'primeng/button';
-import {TableModule} from 'primeng/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
 import { SalaComponent } from './sala/sala.component';
-import {DialogModule} from 'primeng/dialog';
-import {DropdownModule} from 'primeng/dropdown';
-import { CineticService } from './providers/cinetic.service';
+import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
+import { CineticSalaService } from './providers/cinetic.sala.service';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { PeliculaComponent } from './pelicula/pelicula.component';
+import { SillaComponent } from './silla/silla.component';
+import { CineticPeliculaService } from './providers/cinetic.pelicula.service';
+import { CineticSillaService } from './providers/cinetic.silla.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     InicioComponent,
-    SalaComponent
+    SalaComponent,
+    PeliculaComponent,
+    SillaComponent
   ],
   imports: [
     BrowserModule,
@@ -35,9 +42,10 @@ import { CineticService } from './providers/cinetic.service';
     ButtonModule,
     TableModule,
     DialogModule,
-    DropdownModule
+    DropdownModule,
+    TabMenuModule
   ],
-  providers: [ApiService, CineticService],
+  providers: [ApiService, CineticSalaService, CineticPeliculaService, CineticSillaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

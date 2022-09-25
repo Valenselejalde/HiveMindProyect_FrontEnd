@@ -1,0 +1,56 @@
+<div>
+    <p-table [value]="cinetic.lista">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <p-button label="Crear pelicula" (click)="cinetic.ver_formulario=true"></p-button>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Nombre</th>
+                <th>Género</th>
+                <th>Idioma</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-pelicula>
+            <tr>
+                <td>{{pelicula.nombre}}</td>
+                <td>{{pelicula.genero}}</td>
+                <td>{{pelicula.idioma}}</td>
+                <td>
+                    <p-button label="Editar"
+                        (click)="cinetic.llenar_formulario(pelicula); cinetic.ver_formulario=true;"></p-button>
+                </td>
+                <td>
+                    <p-button label="Borrar"
+                        (click)="cinetic.llenar_formulario(pelicula); cinetic.ver_formulario_borrar=true;"></p-button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<p-dialog header="Formulario pelicula" [(visible)]="cinetic.ver_formulario">
+    <form [formGroup]="cinetic.formulario">
+        <div class="grid p-fluid">
+            <div class="col-12 md:col-4">
+                <input type="text" formControlName="nombre" pInputText placeholder="Nombre">
+            </div>
+            <div class="col-12 md:col-4">
+                <input type="text" formControlName="genero" pInputText placeholder="Género">
+            </div>
+            <div class="col-12 md:col-4">
+                <select formControlName="idioma" pInputText>
+                    <option value="Inglés">Inglés</option>
+                    <option value="Español">Español</option>
+                </select>
+            </div>
+        </div>
+    </form>
+    <p-button label="Guardar" (click)="cinetic.crear_actualizar()"></p-button>
+</p-dialog>
+<p-dialog header="Confirmar pelicula" [(visible)]="cinetic.ver_formulario_borrar">
+    <span>¿Está seguro?</span><br /><br />
+    <p-button label="Confirmar" (click)="cinetic.eliminar()"></p-button>
+</p-dialog>

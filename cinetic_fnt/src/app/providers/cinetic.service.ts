@@ -1,64 +1,17 @@
 import { Injectable } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
-import { ApiService } from "./api.service";
+import { MenuItem, PrimeIcons } from 'primeng/api';
+import { Router } from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class CineticService {
-    salas: any;
-    form_sala = this.frmB.group({
-        id: [''],
-        nombre: ['', Validators.required],
-        ciudad: ['', Validators.required]
-    });
-    ver_formulario: boolean = false;
+    items: MenuItem[] = [
+        { label: 'Salas', icon: PrimeIcons.ANGLE_DOUBLE_DOWN, command: (event) => { this.router.navigate(['/sala']) } },
+        { label: 'Películas', icon: PrimeIcons.ANGLE_DOUBLE_DOWN, command: (event) => { this.router.navigate(['/pelicula']) } },
+        { label: 'Sillas', icon: PrimeIcons.ANGLE_DOUBLE_DOWN, command: (event) => { this.router.navigate(['/silla']) } }
+    ];
 
-    constructor(private api: ApiService, private frmB: FormBuilder) { }
-
-    listar() {
-        this.api.get('sala').subscribe(data => {
-            if (data != undefined) {
-                this.salas = data
-            }
-        })
-    }
-
-    crear() {
-        this.api.add('sala', this.form_sala.value).subscribe(data => {
-            if (data != undefined) {
-                this.ver_formulario = false;
-                this.form_sala.reset();
-                this.listar()
-            }
-        })
-    }
-
-    crear_actualizar() {
-        if (this.form_sala.value['id']) {
-            this.actualizar();
-        }
-        else {
-            this.crear();
-        }
-    }
-
-    actualizar() {
-        this.api.update('sala', this.form_sala.value['id'], this.form_sala.value).subscribe(data => {
-            if (data != undefined) {
-                this.ver_formulario = false;
-                this.form_sala.reset();
-                this.listar()
-            }
-        })
-    }
-
-    llenar_form(sala: any) {
-        this.form_sala.patchValue({
-            id: sala.id,
-            nombre: sala.nombre,
-            ciudad: sala.ciudad
-        })
-    }
+    constructor(private router: Router) { }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CineticService } from '../providers/cinetic.service';
+import { CineticSalaService } from '../providers/cinetic.sala.service';
 
 @Component({
   selector: 'app-sala',
@@ -8,7 +8,7 @@ import { CineticService } from '../providers/cinetic.service';
 })
 export class SalaComponent implements OnInit {
 
-  constructor(private cinetic: CineticService) { }
+  constructor(public cinetic: CineticSalaService) { }
 
   ngOnInit(): void {
     this.cinetic.listar()
